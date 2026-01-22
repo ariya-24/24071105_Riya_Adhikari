@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow border-0 mt-4 border-danger">
+      <div class="card-header bg-danger text-white py-3">
+        <h3 class="mb-0 h4">
+          <i class="fas fa-exclamation-triangle me-2"></i>Cancel Booking #{{
+          booking.booking_id }}
+        </h3>
+      </div>
+      <div class="card-body p-4">
+        <p class="lead text-center mb-4">
+          Are you sure you want to cancel this booking?
+        </p>
+
+        <div class="bg-light p-3 rounded mb-4">
+          <div class="row mb-1">
+            <div class="col-sm-4 fw-bold text-secondary">Hotel:</div>
+            <div class="col-sm-8">{{ booking.city }} Hotel</div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-sm-4 fw-bold text-secondary">Check-in:</div>
+            <div class="col-sm-8">{{ booking.check_in_date }}</div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-sm-4 fw-bold text-secondary">Current Status:</div>
+            <div class="col-sm-8 text-uppercase fw-bold">
+              {{ booking.status }}
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-warning border-warning">
+          <h5 class="alert-heading h6 fw-bold">
+            <i class="fas fa-info-circle me-1"></i>Refund Policy Calculation
+          </h5>
+          <hr />
+          <div class="d-flex justify-content-between">
+            <span>Policy Applied:</span>
+            <span class="fw-bold">{{ refund_msg }}</span>
+          </div>
+          <div class="d-flex justify-content-between fs-5 mt-2">
+            <span>Estimated Refund:</span>
+            <span class="fw-bold text-success">£{{ refund_amount }}</span>
+          </div>
+        </div>
+
+        <form
+          action="{{ url_for('booking.cancel', booking_id=booking.booking_id) }}"
+          method="POST"
+          class="d-flex gap-2 mt-4"
+        >
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+          <a
+            href="{{ url_for('booking.my_bookings') }}"
+            class="btn btn-outline-secondary flex-fill"
+          >
+            Go Back
+          </a>
+          <button type="submit" class="btn btn-danger flex-fill fw-bold">
+            Confirm Cancellation
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

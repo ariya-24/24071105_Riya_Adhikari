@@ -1,0 +1,84 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<div class="hero text-white p-5 mb-4 rounded-3 text-center shadow">
+  <div class="container-fluid py-5">
+    <h1 class="display-4 fw-bold">Welcome to World Hotels</h1>
+    <p class="col-md-8 fs-4 mx-auto">Discover luxury and comfort in our hand-picked locations. Find your perfect stay today.</p>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card shadow-lg border-0">
+      <div class="card-header bg-primary text-white text-center py-3">
+        <h3 class="mb-0"><i class="fas fa-search me-2"></i>Find Your Room</h3>
+      </div>
+      <div class="card-body p-4">
+        <form action="{{ url_for('booking.search') }}" method="GET" class="row g-3 needs-validation" novalidate>
+          
+          <div class="col-md-4">
+            <label for="city" class="form-label fw-bold">Destination City</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+              <select name="city" id="city" class="form-select" required>
+                <option value="" disabled selected>Select a City</option>
+                {% for city in cities %}
+                <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <label for="guests" class="form-label fw-bold">Guests</label>
+            <div class="input-group">
+               <span class="input-group-text"><i class="fas fa-user-friends"></i></span>
+              <select name="guests" id="guests" class="form-select">
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+              </select>
+            </div>
+          </div>
+
+           <div class="col-md-3">
+            <label for="check_in" class="form-label fw-bold">Check-in</label>
+            <input type="date" name="check_in" id="check_in" class="form-control" required />
+          </div>
+
+          <div class="col-md-3">
+            <label for="check_out" class="form-label fw-bold">Check-out</label>
+            <input type="date" name="check_out" id="check_out" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="room_type" class="form-label fw-bold">Room Type Preference</label>
+            <select name="room_type" id="room_type" class="form-select">
+              <option value="Standard">Standard (1 guest)</option>
+              <option value="Double">Double (1-2 guests)</option>
+              <option value="Family">Family (1-4 guests)</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+             <label for="currency" class="form-label fw-bold">Currency</label>
+             <select name="currency" id="currency" class="form-select">
+                {% for c in currencies %}
+                <option value="{{ c.currency_code }}" {% if c.currency_code == 'GBP' %}selected{% endif %}>{{ c.currency_code }} ({{ c.symbol }})</option>
+                {% endfor %}
+             </select>
+          </div>
+
+          <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm">
+                <i class="fas fa-search me-2"></i>Search Availability
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3">
+          <h2 class="h5 mb-0">Edit Hotel: {{ hotel.city }}</h2>
+        </div>
+        <div class="card-body p-4">
+          <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              {{ form.total_capacity.label(class="form-label") }} {{
+              form.total_capacity(class="form-control", size=32) }} {% for error
+              in form.total_capacity.errors %}
+              <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.peak_rate.label(class="form-label") }}
+              <div class="input-group">
+                <span class="input-group-text">£</span>
+                {{ form.peak_rate(class="form-control", size=32) }}
+              </div>
+              {% for error in form.peak_rate.errors %}
+              <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-4">
+              {{ form.off_peak_rate.label(class="form-label") }}
+              <div class="input-group">
+                <span class="input-group-text">£</span>
+                {{ form.off_peak_rate(class="form-control", size=32) }}
+              </div>
+              {% for error in form.off_peak_rate.errors %}
+              <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <a
+                href="{{ url_for('admin.manage_hotels') }}"
+                class="btn btn-outline-secondary"
+                >Cancel</a
+              >
+              {{ form.submit(class="btn btn-primary px-4") }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,173 @@
+<!--
+Student ID: 24071105
+Student Name: Riya Adhikari
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Receipt - WH Booking</title>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+      }
+      .receipt-header {
+        text-align: center;
+        border-bottom: 2px solid #333;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+      }
+      .receipt-header h1 {
+        margin: 0;
+        color: #2c3e50;
+      }
+      .receipt-header p {
+        margin: 5px 0 0;
+        color: #7f8c8d;
+      }
+      .receipt-details {
+        margin-bottom: 30px;
+      }
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+      }
+      .detail-label {
+        font-weight: bold;
+        color: #555;
+      }
+      .total-section {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: right;
+        margin-top: 20px;
+      }
+      .total-amount {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #2c3e50;
+      }
+      .status-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+      .status-confirmed {
+        background-color: #d4edda;
+        color: #155724;
+      }
+      .status-cancelled {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .footer {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 0.8em;
+        color: #999;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+        }
+        .no-print {
+          display: none;
+        }
+        .receipt-header {
+          border-bottom: 2px solid #000;
+        }
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: #3498db;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-top: 20px;
+      }
+      .btn:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="receipt-header">
+      <h1>World Hotels Booking System</h1>
+      <p>Official Booking Receipt</p>
+    </div>
+
+    <div class="receipt-details">
+      <div class="detail-row">
+        <span class="detail-label">Booking Reference:</span>
+        <span>#{{ booking.booking_id }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Status:</span>
+        <span class="status-badge status-{{ booking.status }}">
+          {{ booking.status|upper }}
+        </span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Booking Date:</span>
+        <span>{{ booking.booking_date.strftime('%d %B %Y') }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Hotel Location:</span>
+        <span>{{ booking.city }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Room Type:</span>
+        <span>{{ booking.type_name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Guests:</span>
+        <span>{{ booking.guests }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Check-in:</span>
+        <span>{{ booking.check_in_date.strftime('%d %B %Y') }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Check-out:</span>
+        <span>{{ booking.check_out_date.strftime('%d %B %Y') }}</span>
+      </div>
+    </div>
+
+    <div class="total-section">
+      <p>Total Paid</p>
+      <div class="total-amount">£{{ "%.2f"|format(booking.total_price) }}</div>
+    </div>
+
+    <div class="no-print" style="text-align: center">
+      <button onclick="window.print()" class="btn">Print Receipt</button>
+      <a
+        href="{{ url_for('booking.my_bookings') }}"
+        style="margin-left: 10px; color: #3498db; text-decoration: none"
+        >Back to My Bookings</a
+      >
+    </div>
+
+    <div class="footer">
+      <p>Thank you for choosing World Hotels.</p>
+      <p>Student ID: 24071105 | Name: Riya Adhikari</p>
+    </div>
+  </body>
+</html>

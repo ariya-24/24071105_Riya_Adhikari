@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3">
+          <h2 class="h5 mb-0">Edit User: {{ user.username }}</h2>
+        </div>
+        <div class="card-body p-4">
+          <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              <label class="form-label">Email (Read Only)</label>
+              <input
+                type="text"
+                value="{{ user.email }}"
+                disabled
+                class="form-control bg-light"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Current Role</label>
+              <input
+                type="text"
+                value="{{ user.role|title }}"
+                disabled
+                class="form-control bg-light"
+              />
+            </div>
+
+            <div class="mb-4">
+              {{ form.password.label(class="form-label") }} {{
+              form.password(class="form-control", placeholder="Leave blank to
+              keep current") }} {% for error in form.password.errors %}
+              <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+              <div class="form-text text-muted">
+                Only enter a new password if you want to change it.
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <a
+                href="{{ url_for('admin.manage_users') }}"
+                class="btn btn-outline-secondary"
+                >Cancel</a
+              >
+              {{ form.submit(class="btn btn-primary px-4") }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

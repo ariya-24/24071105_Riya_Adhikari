@@ -1,0 +1,85 @@
+{% extends "base.html" %} {% block content %}
+<div class="mb-4">
+  <h1 class="h2 border-bottom pb-2">Admin Dashboard</h1>
+  <p class="text-muted">Welcome to the administration panel.</p>
+</div>
+
+<div class="row g-4">
+  <!-- Manage Users -->
+  <div class="col-md-6 col-lg-3">
+    <a href="{{ url_for('admin.manage_users') }}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-0 bg-primary text-white">
+        <div class="card-body text-center py-5">
+          <i class="fas fa-users fa-3x mb-3"></i>
+          <h3 class="card-title h5">Manage Users</h3>
+          <p class="card-text small text-white-50">
+            View and manage registered users.
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Manage Hotels -->
+  <div class="col-md-6 col-lg-3">
+    <a href="{{ url_for('admin.manage_hotels') }}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-0 bg-success text-white">
+        <div class="card-body text-center py-5">
+          <i class="fas fa-hotel fa-3x mb-3"></i>
+          <h3 class="card-title h5">Manage Hotels</h3>
+          <p class="card-text small text-white-50">
+            Update rates and capacity.
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Manage Bookings -->
+  <div class="col-md-6 col-lg-3">
+    <a
+      href="{{ url_for('admin.manage_bookings') }}"
+      class="text-decoration-none"
+    >
+      <div class="card h-100 shadow-sm border-0 bg-warning text-dark">
+        <div class="card-body text-center py-5">
+          <i class="fas fa-calendar-check fa-3x mb-3"></i>
+          <h3 class="card-title h5">Manage Bookings</h3>
+          <p class="card-text small text-dark-50">View and cancel bookings.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Reports -->
+  <div class="col-md-6 col-lg-3">
+    <a href="{{ url_for('admin.reports') }}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-0 bg-info text-white">
+        <div class="card-body text-center py-5">
+          <i class="fas fa-chart-line fa-3x mb-3"></i>
+          <h3 class="card-title h5">Reports</h3>
+          <p class="card-text small text-white-50">
+            View sales and booking statistics.
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Currencies -->
+  <div class="col-md-6 col-lg-3">
+    <a
+      href="{{ url_for('admin.manage_currencies') }}"
+      class="text-decoration-none"
+    >
+      <div class="card h-100 shadow-sm border-0 bg-secondary text-white">
+        <div class="card-body text-center py-5">
+          <i class="fas fa-money-bill-wave fa-3x mb-3"></i>
+          <h3 class="card-title h5">Currencies</h3>
+          <p class="card-text small text-white-50">Manage exchange rates.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}

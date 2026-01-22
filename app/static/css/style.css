@@ -1,0 +1,92 @@
+/* 
+Student ID: 24071105
+Student Name: Riya Adhikari
+*/
+
+/* Custom Styles Override/Extension for World Hotels */
+
+:root {
+  --primary-color: #0056b3;
+  --secondary-color: #6c757d;
+  --accent-color: #ffc107;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 0;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Card Enhancements */
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+/* Form Styles */
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.25);
+}
+
+/* Navbar Tweaks */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Footer Tweaks */
+footer {
+  border-top: 5px solid var(--primary-color);
+  margin-top: 40px;
+}
+
+/* Custom Utilities */
+.text-primary-custom {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary-custom {
+  background-color: var(--primary-color) !important;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.status-confirmed,
+.status-active {
+  background-color: #d4edda;
+  color: #155724;
+}
+.status-cancelled,
+.status-inactive {
+  background-color: #f8d7da;
+  color: #721c24;
+}

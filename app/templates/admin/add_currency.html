@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3">
+                    <h2 class="h5 mb-0">Add New Currency</h2>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                    
+                        <div class="mb-3">
+                            {{ form.currency_code.label(class="form-label") }}
+                            {{ form.currency_code(class="form-control", placeholder="USD") }}
+                            {% for error in form.currency_code.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-text text-muted">Use standard 3-letter ISO codes (e.g., EUR, JPY).</div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.currency_name.label(class="form-label") }}
+                            {{ form.currency_name(class="form-control", placeholder="US Dollar") }}
+                            {% for error in form.currency_name.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.symbol.label(class="form-label") }}
+                            {{ form.symbol(class="form-control", placeholder="$") }}
+                            {% for error in form.symbol.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.exchange_rate.label(class="form-label") }}
+                            {{ form.exchange_rate(class="form-control", placeholder="0.75") }}
+                             {% for error in form.exchange_rate.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-text text-muted">How many of this currency equal 1 GBP?</div>
+                        </div>
+                    
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('admin.manage_currencies') }}" class="btn btn-outline-secondary">Cancel</a>
+                            {{ form.submit(class="btn btn-primary px-4") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
