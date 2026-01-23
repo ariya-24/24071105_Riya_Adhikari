@@ -1,7 +1,7 @@
 # Student ID: 24071105
 # Student Name: Riya Adhikari
 
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash
 from app.utils import admin_required
 from app.models import User, Booking, Hotel, Currency
 from app.admin.forms import HotelForm, UserEditForm, CurrencyForm, UserAddForm, CurrencyAddForm

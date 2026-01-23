@@ -4,7 +4,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, session, request
 from app.auth.forms import LoginForm, RegistrationForm
 from app.models import User
-from app.utils import login_required, admin_required
 
 
 auth = Blueprint('auth', __name__)
