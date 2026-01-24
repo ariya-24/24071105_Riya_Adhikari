@@ -89,6 +89,7 @@ def search():
                 'check_out': check_out_str
             })
 
+    # All templates should extend base.html for DRYness and maintainability
     return render_template('booking/search_results.html', 
                            hotels=available_hotels, 
                            currency=currency)
@@ -123,16 +124,39 @@ def book_create():
     room_type_name = request.form.get('room_type')
     check_in_str = request.form.get('check_in')
     check_out_str = request.form.get('check_out')
-    price = request.form.get('price') # In production, re-calculate this! Trusting client is bad.
-    
-    # Re-calculate price for security is recommended. 
-    # For this coursework level, ensure we at least re-fetch IDs.
-    
+    # Recalculate price on the server for security
+    hotel = Hotel.get_by_id(hotel_id)
+    if not hotel:
+        flash('Hotel not found.', 'danger')
+        return redirect(url_for('main.index'))
+
+    try:
+        check_in_date = datetime.strptime(check_in_str, "%Y-%m-%d").date()
+        check_out_date = datetime.strptime(check_out_str, "%Y-%m-%d").date()
+        today = datetime.now().date()
+    except Exception:
+        flash('Invalid date format.', 'danger')
+        return redirect(url_for('main.index'))
+
     room_type_id = RoomType.get_id_by_name(room_type_name)
     if not room_type_id:
         flash('Invalid Room Type', 'danger')
         return redirect(url_for('main.index'))
-        
+
+    # Use the pricing logic from pricing.py
+    price, error = calculate_total_price(
+        hotel.peak_rate,
+        hotel.off_peak_rate,
+        check_in_date,
+        check_out_date,
+        today,
+        room_type_name,
+        int(request.form.get('guests', 1))
+    )
+    if error:
+        flash(error, 'danger')
+        return redirect(url_for('main.index'))
+
     booking_id = Booking.create(
         user_id=session['user_id'],
         hotel_id=hotel_id,
@@ -141,7 +165,7 @@ def book_create():
         check_out_date=check_out_str,
         total_price=price
     )
-    
+
     if booking_id:
         flash('Booking Confirmed! Reference ID: ' + str(booking_id), 'success')
         return redirect(url_for('main.index'))

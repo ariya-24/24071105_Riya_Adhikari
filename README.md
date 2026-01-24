@@ -2,42 +2,42 @@
 
 ---
 
-#### Student ID: 24071105
-#### Student Name: Riya Adhikari
+Student ID: 24071105
+Student Name: Riya Adhikari
 
 ## 1. Setup Instructions
 
-#### Prerequisites: Python 3.7+, MySQL Server.
+### Prerequisites: Python 3.7+, MySQL Server
 
 1. Create a MySQL database (e.g., **'wh_booking'**).
 1. Configure database connection in `config.py` (Update DB_USER, DB_PASSWORD if necessary).
 1. Install dependencies:
-   
-   ```bash
-   pip install -r requirements.txt
-   ```
+
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 1. Initialize Database:
-   
-   ```bash
-   python reset_db.py
-   ```
 
-   (This runs schema.sql and seed_data.sql)
+    ```bash
+    python reset_db.py
+    ```
+
+    (This runs schema.sql and seed_data.sql)
 
 1. Create Admin User:
-   
-   ```bash
-   python create_admin.py
-   ```
+
+    ```bash
+    python create_admin.py
+    ```
 
 f. Run Application:
 
-   ```bash
-   python run.py
-   ```
+```bash
+python run.py
+```
 
-   Access at http://127.0.0.1:5000
+Access at [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 

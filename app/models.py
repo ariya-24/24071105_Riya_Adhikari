@@ -27,7 +27,8 @@ class User:
             db.commit()
             return True
         except mysql.connector.Error as err:
-            print(f"Error: {err}") # In production, log this
+            import logging
+            logging.error(f"User.create error: {err}")
             return False
         finally:
             cursor.close()
@@ -81,7 +82,8 @@ class User:
             db.commit()
             return True
         except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            import logging
+            logging.error(f"User.update_password error: {err}")
             return False
         finally:
             cursor.close()
@@ -97,7 +99,8 @@ class User:
             db.commit()
             return True
         except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            import logging
+            logging.error(f"User.delete error: {err}")
             return False
         finally:
             cursor.close()
@@ -257,7 +260,8 @@ class Hotel:
             db.commit()
             return True
         except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            import logging
+            logging.error(f"Hotel.update error: {err}")
             return False
         finally:
             cursor.close()
@@ -288,7 +292,8 @@ class Booking:
             db.commit()
             return cursor.lastrowid
         except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            import logging
+            logging.error(f"Booking.create error: {err}")
             return None
         finally:
             cursor.close()
@@ -356,7 +361,8 @@ class Booking:
             db.commit()
             return True
         except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            import logging
+            logging.error(f"Booking.cancel error: {err}")
             return False
         finally:
             cursor.close()
@@ -410,7 +416,8 @@ class Currency:
             db.commit()
             return True
         except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            import logging
+            logging.error(f"Currency.update_rate error: {err}")
             return False
         finally:
             cursor.close()
@@ -427,7 +434,8 @@ class Currency:
             db.commit()
             return True
         except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            import logging
+            logging.error(f"Currency.create error: {err}")
             return False
         finally:
             cursor.close()

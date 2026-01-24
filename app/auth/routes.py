@@ -16,7 +16,7 @@ def register() -> Response | str:
     
     form = RegistrationForm()
     if form.validate_on_submit():
-        user: User[Any | Any, Any | Any, Any | Any, Any | Any] | None = User.get_by_email(form.email.data)
+        user: User | None = User.get_by_email(form.email.data)
         if user:
             flash('Email already registered.', 'danger')
             return redirect(url_for('auth.register'))
@@ -36,7 +36,7 @@ def login() -> Response | str:
 
     form = LoginForm()
     if form.validate_on_submit():
-        user: User[Any | Any, Any | Any, Any | Any, Any | Any] | None = User.get_by_email(form.email.data)
+        user: User | None = User.get_by_email(form.email.data)
         if user and User.check_password(form.email.data, form.password.data):
             session['user_id'] = user.user_id
             session['username'] = user.username
