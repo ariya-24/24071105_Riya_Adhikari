@@ -38,4 +38,8 @@ def create_app():
     app.register_blueprint(booking, url_prefix='/booking')
     app.register_blueprint(admin, url_prefix='/admin')
 
+    # Auto-setup DB and admin user on first run
+    from app.auto_setup import auto_setup
+    auto_setup(app)
+
     return app
