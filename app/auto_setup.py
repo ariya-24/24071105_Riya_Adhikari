@@ -13,18 +13,26 @@ def auto_setup(app):
         db = get_db()
         cursor = db.cursor()
 
-        # Check for admin user as setup marker
-        cursor.execute("SELECT * FROM users WHERE email = 'admin@wh.com'")
-        if cursor.fetchone():
-            return  # Already set up
+        # Check if users table exists
+        cursor.execute("SHOW TABLES LIKE 'users'")
+        users_table_exists = cursor.fetchone()
 
-        # Run schema.sql
+        if users_table_exists:
+            # If table exists, check for admin user
+            cursor.execute("SELECT * FROM users WHERE email = 'admin@wh.com'")
+            if cursor.fetchone():
+                return  # Already set up
+
+        # Run schema.sql (creates tables if not present)
         schema_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'schema.sql')
         with open(schema_path, 'r') as f:
             schema = f.read()
         for statement in schema.split(';'):
             if statement.strip():
-                cursor.execute(statement)
+                try:
+                    cursor.execute(statement)
+                except Exception:
+                    pass  # Ignore errors if table already exists
 
         # Run seed_data.sql
         seed_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'seed_data.sql')
@@ -32,7 +40,10 @@ def auto_setup(app):
             seed = f.read()
         for statement in seed.split(';'):
             if statement.strip():
-                cursor.execute(statement)
+                try:
+                    cursor.execute(statement)
+                except Exception:
+                    pass  # Ignore errors if data already exists
 
         # Create admin user
         if User.create('admin', 'admin@wh.com', 'admin123'):
